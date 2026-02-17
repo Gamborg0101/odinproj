@@ -1,13 +1,14 @@
 import "./App.css";
 import Header from "./components/Header";
-import InformationSection from "./components/InformationSection";
+import Pages from "./Pages";
 
 function App() {
   return (
     <>
       <div>
         <Header />
-        <InformationSection />
+
+        <Pages />
       </div>
     </>
   );
