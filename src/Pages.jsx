@@ -2,6 +2,7 @@ import Page from "./components/Page";
 import Button from "./components/Button";
 import PageHeader from "./components/PageHeader";
 import { useState } from "react";
+import CVgen from "./components/CVgen";
 
 export default function Pages() {
   const [formData, setFormData] = useState({
@@ -16,6 +17,23 @@ export default function Pages() {
     pracYear: "",
     pracDescription: "",
   });
+  const [savedFormData, setSavedFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    eduExperience: "",
+    eduYear: "",
+    eduDescription: "",
+    pracExperience: "",
+    pracYear: "",
+    pracDescription: "",
+  });
+
+  function handleContactSubmit(e) {
+    e.preventDefault;
+    setSavedFormData(formData);
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -23,13 +41,11 @@ export default function Pages() {
       ...prev,
       [name]: value,
     }));
-
-    console.log(formData);
   }
 
   return (
-    <div className="grid grid-cols-2">
-      <form action="">
+    <div className="grid grid-cols-2 ">
+      <form action={handleContactSubmit}>
         <PageHeader title="Contact information" />
         <Page
           name="firstName"
@@ -82,7 +98,7 @@ export default function Pages() {
           value={formData.eduDescription}
           onChange={handleChange}
         />
-        <Button title="Insert" />
+        <Button title="Insert" submitFunction="submit" />
         <PageHeader title="Pratical" />
         <Page
           name="pracExperience"
@@ -102,11 +118,14 @@ export default function Pages() {
           name="pracDescription"
           type="text"
           placeholder="Small description"
-          value={formData.pracExperience}
+          value={formData.pracDescription}
           onChange={handleChange}
         />
         <Button title="Insert" />
       </form>
+      <div className="bg-amber-100/20 h-full">
+        <CVgen formData={savedFormData} />
+      </div>
     </div>
   );
 }
